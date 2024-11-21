@@ -9,36 +9,47 @@ input = sys.stdin.readline
 
 n, m = map(int, input().split())
 
-# r = []
-# arr = list(range(10000))
-# cdg = 1
-# csg = 1
+r = []
+arr = list(range(10000))
+cdg = 1
+csg = 1
 
-# for i in arr:
-#     j = i
-#     if i != 0 and i != 1:
-#         r.append(i)
-#         while j < 10000:
-#             if arr[j] % i == 0:
-#                 arr[j] = 0
-#             j += 1
+for i in arr:
+    j = i
+    if i != 0 and i != 1:
+        r.append(i)
+        while j < 10000:
+            if arr[j] % i == 0:
+                arr[j] = 0
+            j += 1
 
 
-# for i in range(len(r)):
-#     if n <= r[i] or m <= r[i]:
-#         csg = n * m * cdg
-#         break
+while i < len(r):
+    y = r[i]
 
-#     if n % r[i] == 0 and m % r[i] == 0:
-#         n = n // r[i]
-#         m = m // r[i]
-#         cdg = r[i] * cdg
+    if n <= y or m <= y:
+        if n % y == 0 and m % y == 0:
+            n = n // y
+            m = m // y
+            cdg = y * cdg
+        csg = n * m * cdg
+        break
 
-# if csg == 1:
-#     csg = n * m * cdg
+    if n % y == 0 and m % y == 0:
+        n = n // y
+        m = m // y
+        cdg = y * cdg
+    else:
+        i += 1
 
-cdg = math.gcd(n, m)
-csg = (n * m) // cdg
+if csg == 1:
+    csg = n * m * cdg
+
+# cdg = math.gcd(n, m)
+# csg = (n * m) // cdg
 
 print(cdg)
 print(csg)
+
+
+# 반례는 4 8 이였다...
